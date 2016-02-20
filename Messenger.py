@@ -3,7 +3,10 @@
 #TCP Messenger
 
 import socket
-from Tkinter import *
+from tkinter import *
+
+def sendTxt(event):
+   print ("nothing")
 
 class msg():
    #Handles Message communication
@@ -16,13 +19,13 @@ class msg():
 
    def send_msg(self, text):	#define a send_msg function
       #self.skt.send(text)
-      print "nothing"
+      print ("nothing")
 
    def rec_msg(self):
       BUFFER = 256
       conn, addr = self.skt.accept()
       data = conn.recv(BUFFER)
-      print data
+      print (data)
 
 class createWindow():
    #handles the user interface
@@ -40,15 +43,13 @@ class createWindow():
    
    message = Entry(topFrame)
    message.pack(side=LEFT)
-   submit = Button(topFrame, text = "Send", command = ping.send_msg(message.get()))
+   submit = Button(topFrame, text = "Send") #command = ping.send_msg(message.get()))
+   submit.bind("<Submit>", sendTxt)
    submit.pack(side=RIGHT)
    text = Text(bottomFrame, width = 35, height = 5, wrap = WORD)
    text.pack()
 
    window.mainloop()
-   
-   def sendTxt(self, ping):
-      print "nothing"
    
 
 
