@@ -3,8 +3,10 @@
 #TCP Messenger
 
 import socket
+from Tkinter import *
 
 class msg():
+   #Handles Message communication
    def init_connection(self):
       TCP_IP = '127.0.0.1'   #for testing purposes (0.0.0.0 for INET)
       TCP_PORT = 9999        #personal preferance 
@@ -12,8 +14,9 @@ class msg():
       self.skt.bind((TCP_IP, TCP_PORT))                            #binds to socket/IP
       self.skt.listen(1)                                           #listens on that port
 
-   def send_msg(text):	#define a send_msg function
-      self.skt.send(text)
+   def send_msg(self, text):	#define a send_msg function
+      #self.skt.send(text)
+      print "nothing"
 
    def rec_msg(self):
       BUFFER = 256
@@ -21,8 +24,38 @@ class msg():
       data = conn.recv(BUFFER)
       print data
 
-ping = msg()
-ping.init_connection()
-ping.rec_msg()
+class createWindow():
+   #handles the user interface
+   window = Tk()
+   window.title("TCP MESSENGER")
+
+   ping = msg()
+   ping.init_connection()
+
+   topFrame = Frame(window)
+   bottomFrame = Frame(window)
+
+   topFrame.pack()
+   bottomFrame.pack(side=BOTTOM)
+   
+   message = Entry(topFrame)
+   message.pack(side=LEFT)
+   submit = Button(topFrame, text = "Send", command = ping.send_msg(message.get()))
+   submit.pack(side=RIGHT)
+   text = Text(bottomFrame, width = 35, height = 5, wrap = WORD)
+   text.pack()
+
+   window.mainloop()
+   
+   def sendTxt(self, ping):
+      print "nothing"
+   
+
+
+window = createWindow()
+
+
+   #ping = msg()
+   #ping.init_connection()
    
    
